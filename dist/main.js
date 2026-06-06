@@ -4,6 +4,7 @@ var spawners = require("roles.spawner");
 var harvesters = require("roles.harvester");
 var builders = require("roles.builder");
 var attacker = require("roles.attacker");
+var bigBoy = require("roles.bigBoy");
 var upgrader = require("roles.upgrader");
 var count = {
     harvesters:{
@@ -39,6 +40,14 @@ var count = {
         numbers:2,
         body:[RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE],
         run:attacker.run
+    },
+    bigBoys:{
+        variables:{
+            role:"bigBoy"
+        },
+        numbers:2,
+        body:[ATTACK, ATTACK, ATTACK, TOUGH, TOUGH, MOVE],
+        run:bigBoy.run
     }
 }
 
