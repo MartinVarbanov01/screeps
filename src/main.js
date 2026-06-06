@@ -1,19 +1,28 @@
 var clearDeadCreeps = require("misc.clearMemory");
 var showRole = require("misc.showSpawningRole");
 var spawners = require("roles.spawner");
-var harvesters = require("roles.harvester.harvester");
+var harvesterNormalBehaviour = require("roles.harvesters.normal-behaviour");
+var harvesterFlagBehaviour = require("roles.harvesters.flag-behaviour");
 var builders = require("roles.builder");
 var attacker = require("roles.attacker");
 var bigBoy = require("roles.big-boy");
 var upgrader = require("roles.upgrader");
-var count = {
+var workers = {
     harvesters:{
         variables:{
-            role:"harvester"
+            role:"harvester-normal"
         },
-        numbers:0,
+        numbers:5,
         body:[WORK, CARRY, MOVE],
-        run:harvesters.run
+        run:harvesterNormalBehaviour
+    },
+    harvestersOut:{
+        variables:{
+            role:"harvester-flag"
+        },
+        numbers:4,
+        body:[WORK, CARRY, MOVE],
+        run:harvesterFlagBehaviour
     },
     upgraders:{
         variables:{
@@ -22,7 +31,7 @@ var count = {
         },
         numbers:3,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
-        run:upgrader.run
+        run:upgrader
     },
     builders:{
         variables:{
@@ -31,7 +40,7 @@ var count = {
         },
         numbers:6,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
-        run:builders.run
+        run:builders
     },
     attackers:{
         variables:{
@@ -39,7 +48,7 @@ var count = {
         },
         numbers:4,
         body:[RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE],
-        run:attacker.run
+        run:attacker
     },
     bigBoys:{
         variables:{
@@ -47,7 +56,7 @@ var count = {
         },
         numbers:0,
         body:[ATTACK, ATTACK, ATTACK, TOUGH, TOUGH, MOVE],
-        run:bigBoy.run
+        run:bigBoy
     }
 }
 
@@ -55,11 +64,14 @@ module.exports.loop = function () {
     clearDeadCreeps.run();
     showRole.run();
     for(obj in Game.spawns){
-        spawners.run(Game.spawns[obj],count);
+        spawners.run(Game.spawns[obj],workers);
     }
     for(name in Game.creeps){
         var creep = Game.creeps[name];
-        var type = _.find(count, (c)=> c.variables.role == creep.memory.role);
+        var type = _.find(workers, (c)=> c.variables.role == creep.memory.role);
+        if(!type){
+            creep.suicide();
+        }
         type.run(creep);
     }
 }
