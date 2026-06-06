@@ -38,7 +38,7 @@ var workers = {
             role:"builder",
             building:false
         },
-        numbers:6,
+        numbers:2,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
         run:builders
     },
