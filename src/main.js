@@ -1,18 +1,18 @@
 var clearDeadCreeps = require("misc.clearMemory");
 var showRole = require("misc.showSpawningRole");
 var spawners = require("roles.spawner");
-var harvesters = require("roles.harvester");
+var harvesters = require("roles.harvester.harvester");
 var builders = require("roles.builder");
 var attacker = require("roles.attacker");
-var bigBoy = require("roles.bigBoy");
+var bigBoy = require("roles.big-boy");
 var upgrader = require("roles.upgrader");
 var count = {
     harvesters:{
         variables:{
             role:"harvester"
         },
-        numbers:20,
-        body:[WORK, CARRY, MOVE, MOVE],
+        numbers:0,
+        body:[WORK, CARRY, MOVE],
         run:harvesters.run
     },
     upgraders:{
@@ -20,7 +20,7 @@ var count = {
             role:"upgrader",
             upgrading:false
         },
-        numbers:20,
+        numbers:3,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
         run:upgrader.run
     },
@@ -29,7 +29,7 @@ var count = {
             role:"builder",
             building:false
         },
-        numbers:10,
+        numbers:6,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
         run:builders.run
     },
@@ -37,15 +37,15 @@ var count = {
         variables:{
             role:"attackers"
         },
-        numbers:2,
-        body:[RANGED_ATTACK, RANGED_ATTACK, RANGED_ATTACK, MOVE],
+        numbers:4,
+        body:[RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE],
         run:attacker.run
     },
     bigBoys:{
         variables:{
             role:"bigBoy"
         },
-        numbers:2,
+        numbers:0,
         body:[ATTACK, ATTACK, ATTACK, TOUGH, TOUGH, MOVE],
         run:bigBoy.run
     }
