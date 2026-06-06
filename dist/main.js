@@ -8,15 +8,15 @@ var attacker = require("roles.attacker");
 var bigBoy = require("roles.big-boy");
 var upgrader = require("roles.upgrader");
 var workers = {
-    harvesters:{
+    harvestersNormal:{
         variables:{
             role:"harvester-normal"
         },
-        numbers:5,
+        numbers:4,
         body:[WORK, CARRY, MOVE],
         run:harvesterNormalBehaviour
     },
-    harvestersOut:{
+    harvestersFlag:{
         variables:{
             role:"harvester-flag"
         },
