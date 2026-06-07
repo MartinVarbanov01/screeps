@@ -2,11 +2,11 @@ var normalHarvester = require("roles.harvesters.normal-behaviour");
 var checkForHostile = require("misc.checkForHostiles");
 module.exports = function (creep) {
     var coloredPath = { visualizePathStyle: { stroke: "#27ae60", opacity: 0.25, lineStyle: 'dashed' } };
-    var flagAway = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-away" && flag.color == COLOR_GREEN });
-    var flagHome = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-home" });
-    var spawn = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_SPAWN });
-    var exit = creep.pos.findClosestByPath(FIND_EXIT);
-    var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+    var flagAway = creep.room.find(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-away" && flag.color == COLOR_GREEN })[0];
+    var flagHome = creep.room.find(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-home" })[0];
+    var spawn = creep.room.find(FIND_MY_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_SPAWN })[0];
+    var exit = creep.room.find(FIND_EXIT)[0];
+    var source = creep.room.find(FIND_SOURCES_ACTIVE)[0];
     if(checkForHostile(creep)){
         return; //dont do anything if there are hostiles nearby, to prioritize safety
     }
@@ -21,7 +21,7 @@ module.exports = function (creep) {
             creep.moveTo(flagAway, coloredPath);
         }
         else {
-            var exit = creep.pos.findClosestByPath(FIND_EXIT);
+            var exit = creep.room.find(FIND_EXIT)[0];
             creep.moveTo(exit, coloredPath);
         }
         return; //RETURN EARLY TO PRIORITIZE TRANSFER
@@ -32,7 +32,7 @@ module.exports = function (creep) {
                 creep.moveTo(flagHome, coloredPath);
             }
             else {
-                var exit = creep.pos.findClosestByPath(FIND_EXIT);
+                var exit = creep.room.find(FIND_EXIT)[0];
                 creep.moveTo(exit, coloredPath);
             }
             return; //RETURN EARLY TO PRIORITIZE TRANSFER

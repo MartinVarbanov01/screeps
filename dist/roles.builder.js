@@ -1,6 +1,6 @@
 module.exports = function (creep) {
     var coloredPath = { visualizePathStyle: { stroke: "#f39c12", opacity: 0.25, lineStyle: 'dashed' } };
-    var closestSource = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
+    var closestSource = creep.room.find(FIND_SOURCES_ACTIVE)[0];
     if (creep.memory.building && creep.store[RESOURCE_ENERGY] == 0) {
         creep.memory.building = false;
 
@@ -9,7 +9,7 @@ module.exports = function (creep) {
         creep.memory.building = true;
     }
     if (creep.memory.building) {
-        const target = creep.pos.findClosestByPath(FIND_CONSTRUCTION_SITES);
+        const target = creep.room.find(FIND_CONSTRUCTION_SITES)[0];
         if (target) {
             if (creep.build(target) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, coloredPath);
@@ -20,7 +20,7 @@ module.exports = function (creep) {
                 STRUCTURE_SPAWN,
                 STRUCTURE_CONTAINER
             ]
-            var closestSpawn = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (structure) => valid.includes(structure.structureType) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0 });
+            var closestSpawn = creep.room.find(FIND_STRUCTURES, { filter: (structure) => valid.includes(structure.structureType) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0 })[0];
             if (creep.transfer(closestSpawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 
                 creep.moveTo(closestSpawn, coloredPath);

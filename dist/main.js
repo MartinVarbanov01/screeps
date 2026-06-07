@@ -12,7 +12,7 @@ var workers = {
         variables:{
             role:"harvester-normal"
         },
-        numbers:3,
+        numbers:9,
         body:[WORK, CARRY, MOVE],
         run:harvesterNormalBehaviour
     },
@@ -20,7 +20,7 @@ var workers = {
         variables:{
             role:"harvester-flag"
         },
-        numbers:4,
+        numbers:6,
         body:[WORK, CARRY, MOVE],
         run:harvesterFlagBehaviour
     },
@@ -29,7 +29,7 @@ var workers = {
             role:"upgrader",
             upgrading:false
         },
-        numbers:3,
+        numbers:1,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
         run:upgrader
     },
@@ -39,7 +39,7 @@ var workers = {
             building:false
         },
         numbers:10,
-        body:[WORK, CARRY, CARRY, CARRY, MOVE],
+        body:[WORK, CARRY, MOVE],
         run:builders
     },
     attackers:{

@@ -8,7 +8,7 @@ module.exports = {
             }
             if (creep.length > count[type].numbers) {
 
-                var killSomeone = _.find((Game.creeps), (creep) => creep.memory.role == count[type].variables.role);
+                var killSomeone = _.find((Game.creeps), (creep) => creep.memory.role == count[type].variables.role && creep.store.getUsedCapacity() == 0);
                 killSomeone.suicide();
             }
         }

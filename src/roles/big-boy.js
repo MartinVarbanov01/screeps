@@ -9,8 +9,8 @@ module.exports = function (creep) {
     ]
 
     for (thing in priorityList) {
-        var enemy = creep.pos.findClosestByPath(priorityList[thing]);
-        var flag = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => { flag.name == "Flag1" } })
+        var enemy = creep.room.find(priorityList[thing])[0];
+        var flag = creep.room.find(FIND_FLAGS, { filter: (flag) => { flag.name == "Flag1" } })[0];
         if (!enemy) {
             continue;
         }
