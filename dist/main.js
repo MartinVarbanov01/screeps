@@ -12,7 +12,7 @@ var workers = {
         variables:{
             role:"harvester-normal"
         },
-        numbers:4,
+        numbers:3,
         body:[WORK, CARRY, MOVE],
         run:harvesterNormalBehaviour
     },
@@ -38,7 +38,7 @@ var workers = {
             role:"builder",
             building:false
         },
-        numbers:2,
+        numbers:10,
         body:[WORK, CARRY, CARRY, CARRY, MOVE],
         run:builders
     },
