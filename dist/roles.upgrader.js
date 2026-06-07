@@ -9,7 +9,8 @@ module.exports = function (creep) {
         creep.memory.upgrading = true;
     }
     if (creep.memory.upgrading) {
-        const target = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_CONTROLLER });
+        const target = creep.pos.findClosestByPath(FIND_STRUCTURES, 
+            { filter: (structure) => structure.structureType == STRUCTURE_CONTROLLER });
         if (target) {
             if (creep.upgradeController(target) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, coloredPath);
@@ -17,7 +18,8 @@ module.exports = function (creep) {
         }
     }
     else {
-        var container = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_CONTAINER });
+        var container = creep.pos.findClosestByPath(FIND_STRUCTURES, 
+            { filter: (structure) => structure.structureType == STRUCTURE_CONTAINER });
         if (container) {
             if (creep.withdraw(container, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(container, coloredPath);

@@ -8,7 +8,8 @@ module.exports = function (creep) {
             break;
         }
     }
-    var flag = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) =>  flag.name == "attack" });
+    var flag = creep.pos.findClosestByPath(FIND_FLAGS, 
+        { filter: (flag) =>  flag.name == "attack" });
     if (flag) {
         creep.moveTo(flag, coloredPath);
     }

@@ -14,7 +14,9 @@ module.exports = function (creep) {
             STRUCTURE_STORAGE,
             STRUCTURE_CONTAINER,
         ]
-        var closestSpawn = creep.pos.findClosestByPath(FIND_STRUCTURES, { filter: (structure) => valid.includes(structure.structureType) && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0 });
+        var closestSpawn = creep.pos.findClosestByPath(FIND_STRUCTURES,
+             { filter: (structure) => valid.includes(structure.structureType) 
+                && structure.store.getFreeCapacity(RESOURCE_ENERGY) > 0 });
         if (creep.transfer(closestSpawn, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(closestSpawn, coloredPath);
         }

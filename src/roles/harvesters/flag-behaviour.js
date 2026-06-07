@@ -2,9 +2,13 @@ var normalHarvester = require("roles.harvesters.normal-behaviour");
 var checkForHostile = require("misc.checkForHostiles");
 module.exports = function (creep) {
     var coloredPath = { visualizePathStyle: { stroke: "#27ae60", opacity: 0.25, lineStyle: 'dashed' } };
-    var flagAway = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-away" && flag.color == COLOR_GREEN });
-    var flagHome = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => flag.name == "harvest-home" });
-    var spawn = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, { filter: (structure) => structure.structureType == STRUCTURE_SPAWN });
+    var flagAway = creep.pos.findClosestByPath(FIND_FLAGS, 
+        { filter: (flag) => flag.name == "harvest-away" 
+            && flag.color == COLOR_GREEN });
+    var flagHome = creep.pos.findClosestByPath(FIND_FLAGS, 
+        { filter: (flag) => flag.name == "harvest-home" });
+    var spawn = creep.pos.findClosestByPath(FIND_MY_STRUCTURES, 
+        { filter: (structure) => structure.structureType == STRUCTURE_SPAWN });
     var exit = creep.pos.findClosestByPath(FIND_EXIT);
     var source = creep.pos.findClosestByPath(FIND_SOURCES_ACTIVE);
     if(checkForHostile(creep)){

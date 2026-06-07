@@ -10,7 +10,8 @@ module.exports = function (creep) {
 
     for (thing in priorityList) {
         var enemy = creep.pos.findClosestByPath(priorityList[thing]);
-        var flag = creep.pos.findClosestByPath(FIND_FLAGS, { filter: (flag) => { flag.name == "Flag1" } });
+        var flag = creep.pos.findClosestByPath(FIND_FLAGS, 
+            { filter: (flag) => { flag.name == "attack" } });
         if (!enemy) {
             continue;
         }
