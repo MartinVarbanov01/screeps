@@ -20,7 +20,7 @@ var workers = {
         variables:{
             role:"harvester-flag"
         },
-        numbers:6,
+        numbers:9,
         body:[WORK, CARRY, MOVE],
         run:harvesterFlagBehaviour
     },
