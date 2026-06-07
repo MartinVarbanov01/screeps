@@ -46,8 +46,8 @@ var workers = {
         variables:{
             role:"attackers"
         },
-        numbers:4,
-        body:[RANGED_ATTACK, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, TOUGH, MOVE],
+        numbers:0,
+        body:[ATTACK, ATTACK, MOVE, MOVE],
         run:attacker
     },
     bigBoys:{
