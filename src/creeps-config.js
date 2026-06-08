@@ -8,8 +8,8 @@ var upgrader = require("roles.upgrader");
 module.exports = {
     "harvester-normal": {
         variables: {},
-        numbers: 20,
-        body: [WORK, CARRY, MOVE],
+        numbers: 30,
+        body: [WORK, WORK, CARRY, MOVE],
         run: harvesterNormalBehaviour
     },
     "harvester-flag": {

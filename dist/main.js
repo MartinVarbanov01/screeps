@@ -3,7 +3,7 @@ var showRole = require("misc.showSpawningRole");
 var spawners = require("spawner.spawner");
 var creepsConfig = require("creeps-config");
 var priority = require("priority-list");
-var flagScript = require("flags.harvest-flags")
+var flagScript = require("flags.master-flags")
 Memory.delay = 0;
 
 module.exports.loop = function () {
@@ -16,7 +16,6 @@ module.exports.loop = function () {
     }
     delay--;
     spawners.run(delay);
-    console.log("=========")
     for (name in Game.creeps){
         var creep = Game.creeps[name];
         creepsConfig[creep.memory.role].run(creep,delay);
