@@ -1,78 +1,33 @@
 var clearDeadCreeps = require("misc.clearMemory");
 var showRole = require("misc.showSpawningRole");
-var spawners = require("roles.spawner");
-var harvesterNormalBehaviour = require("roles.harvesters.normal-behaviour");
-var harvesterFlagBehaviour = require("roles.harvesters.flag-behaviour");
-var builders = require("roles.builder");
-var attacker = require("roles.attacker");
-var bigBoy = require("roles.big-boy");
-var upgrader = require("roles.upgrader");
-var workers = {
-    harvestersNormal:{
-        variables:{
-            role:"harvester-normal"
-        },
-        numbers:9,
-        body:[WORK, CARRY, MOVE],
-        run:harvesterNormalBehaviour
-    },
-    harvestersFlag:{
-        variables:{
-            role:"harvester-flag"
-        },
-        numbers:9,
-        body:[WORK, CARRY, MOVE],
-        run:harvesterFlagBehaviour
-    },
-    upgraders:{
-        variables:{
-            role:"upgrader",
-            upgrading:false
-        },
-        numbers:1,
-        body:[WORK, CARRY, CARRY, CARRY, MOVE],
-        run:upgrader
-    },
-    builders:{
-        variables:{
-            role:"builder",
-            building:false
-        },
-        numbers:10,
-        body:[WORK, CARRY, MOVE],
-        run:builders
-    },
-    attackers:{
-        variables:{
-            role:"attackers"
-        },
-        numbers:5,
-        body:[ATTACK, ATTACK, MOVE, MOVE],
-        run:attacker
-    },
-    bigBoys:{
-        variables:{
-            role:"bigBoy"
-        },
-        numbers:0,
-        body:[ATTACK, ATTACK, ATTACK, TOUGH, TOUGH, MOVE],
-        run:bigBoy
-    }
-}
+var spawners = require("spawner.spawner");
+var creepsConfig = require("creeps-config");
+var priority = require("priority-list");
+var flagScript = require("flags.harvest-flags")
+Memory.delay = 0;
 
 module.exports.loop = function () {
     clearDeadCreeps.run();
     showRole.run();
-    for(obj in Game.spawns){
-        spawners.run(Game.spawns[obj],workers);
+    let delay = Memory.delay;
+    if(delay == 0 || delay == null || delay == undefined){
+        delay = 10;
+        Memory.delay = delay;
     }
-    for(name in Game.creeps){
+    delay--;
+    spawners.run(delay);
+    console.log("=========")
+    for (name in Game.creeps){
         var creep = Game.creeps[name];
-        var type = _.find(workers, (c)=> c.variables.role == creep.memory.role);
-        if(!type){
-            creep.suicide();
-        }
-        type.run(creep);
+        creepsConfig[creep.memory.role].run(creep,delay);
     }
+    for(flag in Game.flags){
+        var flag = Game.flags[flag];
+        flagScript(flag,delay);
+    }
+
+
+
+    Memory.delay = delay;
 }
 

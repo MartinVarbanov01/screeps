@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         options: {
             email: process.env.SCREEPS_EMAIL,
             token: process.env.SCREEPS_TOKEN,
-            branch: process.env.SCREEPS_BRANCH,
+            branch: "version-2",
         },
         dist: {
             src: ['dist/*.js'],
