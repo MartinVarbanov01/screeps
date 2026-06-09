@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             files: [{
                 expand: true,
                 cwd: 'src/',
-                src: ['**/*.js','**/*.json'],
+                src: ['**/*.ts'],
                 dest: 'dist/',
                 rename: function(dest, src) {
                     return dest + src.replace(/\//g, '.');
